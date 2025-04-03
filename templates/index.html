@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depreciation Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <h1 class="text-center text-primary">Depreciation Calculator</h1>
+            <p class="text-center">Upload your asset data and filter by Item No. and Purchase Date</p>
+            
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="item_no" class="form-label">Item No:</label>
+                    <input type="text" id="item_no" name="item_no" class="form-control" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="start_date" class="form-label">Start Date (YYYY-MM-DD):</label>
+                        <input type="date" id="start_date" name="start_date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="end_date" class="form-label">End Date (YYYY-MM-DD):</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="asset_file" class="form-label">Upload Asset Data (CSV):</label>
+                    <input type="file" id="asset_file" name="asset_file" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Generate Depreciation Report</button>
+            </form>
+            {% if request.method == 'POST' %}
+                <div class="alert alert-success mt-4 text-center">
+                    <h4>Report Generated!</h4>
+                    <a href="{{ url_for('download', filename='depreciation_report.csv') }}" class="btn btn-success mt-2">Download Report</a>
+                </div>
+            {% endif %}
+            {% if error_message %}
+                <div class="alert alert-danger mt-3">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
