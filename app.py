@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, send_file, redirect, url_for
 import datetime
 import csv
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 
 # Define the Asset class with Carcass Value
